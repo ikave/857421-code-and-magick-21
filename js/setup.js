@@ -51,24 +51,27 @@ const setupOpen = document.querySelector(`.setup-open`);
 const setup = document.querySelector(`.setup`);
 const setupClose = setup.querySelector(`.setup-close`);
 const setupWizardForm = setup.querySelector(`.setup-wizard-form`);
+const setupUserName = setup.querySelector(`.setup-user-name`);
 
 const onPopupEscPress = function (evt) {
   if (evt.key === `Escape`) {
-    evt.preventDefault();
-    closePopup();
+    if (evt.target !== setupUserName) {
+      evt.preventDefault();
+      closePopup();
+    }
   }
 };
 
 const openPopup = function () {
   setup.classList.remove(`hidden`);
 
-  setupClose.addEventListener(`keydown`, onPopupEscPress);
+  document.addEventListener(`keydown`, onPopupEscPress);
 };
 
 const closePopup = function () {
   setup.classList.add(`hidden`);
 
-  setupClose.removeEventListener(`keydown`, onPopupEscPress);
+  document.removeEventListener(`keydown`, onPopupEscPress);
 };
 
 setupOpen.addEventListener(`click`, function () {
